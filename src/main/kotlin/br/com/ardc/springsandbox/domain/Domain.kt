@@ -15,3 +15,10 @@ data class User(val userName: String, val displayName: String?)
  * @param isRead flag indicating if the message was read by the recipient or not, once this is true the message can no longer be deleted or editted
  */
 data class Message(val sender: User, val recipient: User, val content: String, val isRead: Boolean)
+
+/**
+ * Creates a new message using the selected user as the sender.
+ */
+fun User.createMessageTo(recipient: User, content: String): Message {
+    return Message(this, recipient, content, false)
+}

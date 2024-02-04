@@ -69,4 +69,24 @@ class DomainTests {
             assertThat(got).isEqualTo(expectedMessageJson)
         }
     }
+
+    @Nested
+    inner class UseCasesTests {
+        @Test
+        fun `Given an User, When creating a new message, A new message should be created with the appropriate sender`(): Unit {
+            // arrange
+            val sender = User("ralves", "Rodolpho Alves")
+            val recipient = User("fulano", "Full Lano")
+            val content = "I like turtles"
+
+            // act
+            val got = sender.createMessageTo(recipient, content)
+
+            // assert
+            assertThat(got.sender).isEqualTo(sender)
+            assertThat(got.recipient).isEqualTo(recipient)
+            assertThat(got.content).isEqualTo(content)
+            assertThat(got.isRead).isFalse()
+        }
+    }
 }
